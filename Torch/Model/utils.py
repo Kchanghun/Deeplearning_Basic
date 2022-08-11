@@ -1,4 +1,5 @@
 import torch
+from torch import nn
 
 mps_device = torch.device("mps")
 
@@ -10,6 +11,9 @@ def train_loop(verbose, device, dataloader, model, loss_fn, optimizer):
         if device == 'GPU':
             X = X.to(mps_device)
             y = y.to(mps_device)
+        # logits = model(X)
+        # softmax = nn.Softmax(dim=1)
+        # pred = softmax(logits)
         pred = model(X)
         loss = loss_fn(pred,y)
         
@@ -37,6 +41,9 @@ def test_loop(verbose, device, dataloader, model, loss_fn):
             if device == 'GPU':
                 X = X.to(mps_device)
                 y = y.to(mps_device)
+            # logits = model(X)
+            # softmax = nn.Softmax(dim=1)
+            # pred = softmax(logits)
             pred = model(X)
             test_loss += loss_fn(pred,y).item()
             correct +=(pred.argmax(1) == y).type(torch.float).sum().item()
