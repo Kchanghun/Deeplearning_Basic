@@ -21,7 +21,7 @@ def train_loop(verbose, device, dataloader, model, loss_fn, optimizer):
         loss.backward()
         optimizer.step()
         
-        if batch%100 == 0:
+        if batch%10 == 0:
             loss, current = loss.item(), batch*len(X)
             correct +=(pred.argmax(1) == y).type(torch.float).sum().item()
             correct /= len(X)
