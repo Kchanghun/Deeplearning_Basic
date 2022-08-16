@@ -130,4 +130,6 @@ dmypy.json
 
 # Dataset
 /Torch/data
+/Torch/Model/*.pt
+/Torch/Model/*.pth
 .DS_Store

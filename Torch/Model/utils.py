@@ -1,5 +1,4 @@
 import torch
-from torch import nn
 
 mps_device = torch.device("mps")
 
@@ -23,8 +22,8 @@ def train_loop(verbose, device, dataloader, model, loss_fn, optimizer):
         
         if batch%10 == 0:
             loss, current = loss.item(), batch*len(X)
-            correct +=(pred.argmax(1) == y).type(torch.float).sum().item()
-            correct /= len(X)
+            temp = (pred.argmax(1) == y).type(torch.float).sum().item()
+            correct = temp / len(X)
             if verbose:
                 print(f"loss: {loss:>7f} [{current:>5d}/{size:>5d}]")
             train_loss.append(loss)
